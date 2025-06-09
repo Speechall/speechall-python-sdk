@@ -16,6 +16,7 @@ Requirements:
 import os
 import sys
 from pathlib import Path
+import json
 
 from openapi_client import ApiClient, Configuration
 from openapi_client.api.speech_to_text_api import SpeechToTextApi
@@ -53,7 +54,7 @@ def list_available_models(api_instance):
         
         models = api_instance.list_speech_to_text_models()
         
-        for model in models[:10]:  # Show first 10 models
+        for model in models[:3]:  # Show first 3 models
             print(f"🤖 {model.id}")
             print(f"   Name: {model.display_name}")
             print(f"   Provider: {model.provider}")
@@ -61,8 +62,8 @@ def list_available_models(api_instance):
                 print(f"   Description: {model.description}")
             print()
             
-        if len(models) > 10:
-            print(f"... and {len(models) - 10} more models available")
+        if len(models) > 3:
+            print(f"... and {len(models) - 3} more models available")
             
     except ApiException as e:
         print(f"❌ Error listing models: {e}")
@@ -91,12 +92,11 @@ def transcribe_local_file(api_instance, file_path, model_id="openai.whisper-1", 
             body=audio_data,
             language=TranscriptLanguageCode(language),
             output_format=TranscriptOutputFormat.JSON,
-            punctuation=True,
-            timestamp_granularity="segment"
+            punctuation=True
         )
         
         print("✅ Transcription completed!")
-        print(f"📝 Result: {result}")
+        print(f"📝 Result:\n{json.dumps(result.to_dict(), indent=2, default=str)}")
         
     except FileNotFoundError:
         print(f"❌ File not found: {file_path}")
@@ -152,7 +152,7 @@ def transcribe_with_advanced_features(api_instance, file_path):
         
         # Use Deepgram model which supports advanced features
         result = api_instance.transcribe(
-            model=TranscriptionModelIdentifier.DEEPGRAM_DOT_NOVA_MINUS_2,
+            model=TranscriptionModelIdentifier.ASSEMBLYAI_DOT_BEST,
             body=audio_data,
             language=TranscriptLanguageCode.EN,
             output_format=TranscriptOutputFormat.JSON,
@@ -165,7 +165,7 @@ def transcribe_with_advanced_features(api_instance, file_path):
         )
         
         print("✅ Advanced transcription completed!")
-        print(f"📝 Result: {result}")
+        print(f"📝 Result:\n{json.dumps(result.to_dict(), indent=2, default=str)}")
         
     except ApiException as e:
         print(f"❌ API Error: {e}")

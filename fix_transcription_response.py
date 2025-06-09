@@ -159,15 +159,108 @@ def apply_transcription_response_fix():
     except Exception as e:
         print(f"❌ Error applying fix: {e}")
         return False
+    
+def apply_release_date_fix():
+    """Apply the fix to SpeechToTextModel release_date field."""
+    
+    target_file = "openapi_client/models/speech_to_text_model.py"
+    
+    if not os.path.exists(target_file):
+        print(f"❌ File not found: {target_file}")
+        return False
+    
+    print(f"🔧 Applying release_date fix to {target_file}")
+    
+    # Read the current file
+    with open(target_file, 'r') as f:
+        content = f.read()
+    
+    # Check if the fix is already applied
+    if "from datetime import date, datetime" in content and "Added this to fix the release_date field" in content:
+        print("✅ Fix already applied - skipping")
+        return True
+
+    old_content = '''from datetime import date'''
+    new_content = '''from datetime import date, datetime'''
+    
+    # Replace the old content with the new content
+    content = content.replace(old_content, new_content)
+
+    old_content = '''    @validator('accuracy_tier')
+    def accuracy_tier_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in ('basic', 'standard', 'enhanced', 'premium',):
+            raise ValueError("must be one of enum values ('basic', 'standard', 'enhanced', 'premium')")
+        return value'''
+    
+    new_content = '''    @validator('accuracy_tier')
+    def accuracy_tier_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in ('basic', 'standard', 'enhanced', 'premium',):
+            raise ValueError("must be one of enum values ('basic', 'standard', 'enhanced', 'premium')")
+        return value
+
+    # Added this to fix the release_date field
+    @validator('release_date', pre=True)
+    def parse_release_date(cls, value):
+        """Parse release_date from various string formats"""
+        if value is None or isinstance(value, date):
+            return value
+        
+        if isinstance(value, str):
+            # Try common date formats
+            date_formats = [
+                '%Y-%m-%d',          # ISO format: 2023-12-25
+                '%m/%d/%Y',          # US format: 12/25/2023
+                '%d/%m/%Y',          # European format: 25/12/2023
+                '%Y-%m-%dT%H:%M:%S', # ISO datetime format
+                '%Y-%m-%dT%H:%M:%SZ',# ISO datetime with Z
+                '%Y-%m-%d %H:%M:%S', # Space separated datetime
+            ]
+            
+            for fmt in date_formats:
+                try:
+                    parsed_datetime = datetime.strptime(value, fmt)
+                    return parsed_datetime.date()
+                except ValueError:
+                    continue
+            
+            # If no format works, try to return None to avoid errors
+            return None
+        
+        return value'''
+    
+    # Replace the old content with the new content
+    content = content.replace(old_content, new_content)
+    
+    # Write the fixed content back
+    with open(target_file, 'w') as f:
+        f.write(content)
+    
+    print("✅ Release date fix applied successfully!")
+    return True
 
 def main():
     """Main function."""
     if apply_transcription_response_fix():
         print("🎉 Automatic fix completed successfully!")
-        sys.exit(0)
     else:
         print("❌ Fix failed!")
         sys.exit(1)
+    
+    if apply_release_date_fix():
+        print("🎉 Automatic fix completed successfully!")
+    else:
+        print("❌ Fix failed!")
+        sys.exit(1)
+    
+    sys.exit(0)
 
 if __name__ == "__main__":
     main() 

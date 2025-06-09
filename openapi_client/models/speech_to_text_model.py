@@ -78,6 +78,7 @@ class SpeechToTextModel(BaseModel):
             raise ValueError("must be one of enum values ('basic', 'standard', 'enhanced', 'premium')")
         return value
 
+    # Added this to fix the release_date field
     @validator('release_date', pre=True)
     def parse_release_date(cls, value):
         """Parse release_date from various string formats"""
