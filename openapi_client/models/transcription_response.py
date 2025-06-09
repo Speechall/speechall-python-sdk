@@ -56,27 +56,16 @@ class TranscriptionResponse(BaseModel):
 
     @validator('actual_instance')
     def actual_instance_must_validate_oneof(cls, v):
-        instance = TranscriptionResponse.construct()
-        error_messages = []
-        match = 0
-        # validate data type: TranscriptionDetailed
-        if not isinstance(v, TranscriptionDetailed):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TranscriptionDetailed`")
-        else:
-            match += 1
-        # validate data type: TranscriptionOnlyText
-        if not isinstance(v, TranscriptionOnlyText):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TranscriptionOnlyText`")
-        else:
-            match += 1
-        if match > 1:
-            # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in TranscriptionResponse with oneOf schemas: TranscriptionDetailed, TranscriptionOnlyText. Details: " + ", ".join(error_messages))
-        elif match == 0:
-            # no match
-            raise ValueError("No match found when setting `actual_instance` in TranscriptionResponse with oneOf schemas: TranscriptionDetailed, TranscriptionOnlyText. Details: " + ", ".join(error_messages))
-        else:
+        # Check if it's a valid type for either schema
+        if isinstance(v, (TranscriptionDetailed, TranscriptionOnlyText)):
             return v
+        
+        # If not an instance of either expected type, raise error
+        error_messages = [
+            f"Error! Input type `{type(v)}` is not `TranscriptionDetailed`",
+            f"Error! Input type `{type(v)}` is not `TranscriptionOnlyText`"
+        ]
+        raise ValueError("No match found when setting `actual_instance` in TranscriptionResponse with oneOf schemas: TranscriptionDetailed, TranscriptionOnlyText. Details: " + ", ".join(error_messages))
 
     @classmethod
     def from_dict(cls, obj: dict) -> TranscriptionResponse:
@@ -87,29 +76,41 @@ class TranscriptionResponse(BaseModel):
         """Returns the object represented by the json string"""
         instance = TranscriptionResponse.construct()
         error_messages = []
-        match = 0
-
-        # deserialize data into TranscriptionDetailed
+        
+        # Parse JSON once to avoid multiple parsing
+        try:
+            json_obj = json.loads(json_str)
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON: {str(e)}")
+        
+        # Try TranscriptionDetailed first - if it has extra fields beyond id/text, prefer it
+        # Check if the JSON contains fields that are specific to TranscriptionDetailed
+        has_detailed_fields = any(key in json_obj for key in ['language', 'duration', 'segments', 'words', 'provider_metadata'])
+        
+        if has_detailed_fields:
+            # Definitely should be TranscriptionDetailed
+            try:
+                instance.actual_instance = TranscriptionDetailed.from_json(json_str)
+                return instance
+            except (ValidationError, ValueError) as e:
+                error_messages.append(f"TranscriptionDetailed validation failed: {str(e)}")
+        
+        # Try TranscriptionDetailed first (even without extra fields, it might still be the correct type)
         try:
             instance.actual_instance = TranscriptionDetailed.from_json(json_str)
-            match += 1
+            return instance
         except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into TranscriptionOnlyText
+            error_messages.append(f"TranscriptionDetailed validation failed: {str(e)}")
+        
+        # Fall back to TranscriptionOnlyText
         try:
             instance.actual_instance = TranscriptionOnlyText.from_json(json_str)
-            match += 1
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-
-        if match > 1:
-            # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into TranscriptionResponse with oneOf schemas: TranscriptionDetailed, TranscriptionOnlyText. Details: " + ", ".join(error_messages))
-        elif match == 0:
-            # no match
-            raise ValueError("No match found when deserializing the JSON string into TranscriptionResponse with oneOf schemas: TranscriptionDetailed, TranscriptionOnlyText. Details: " + ", ".join(error_messages))
-        else:
             return instance
+        except (ValidationError, ValueError) as e:
+            error_messages.append(f"TranscriptionOnlyText validation failed: {str(e)}")
+
+        # If we get here, neither worked
+        raise ValueError("No match found when deserializing the JSON string into TranscriptionResponse with oneOf schemas: TranscriptionDetailed, TranscriptionOnlyText. Details: " + ", ".join(error_messages))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the actual instance"""

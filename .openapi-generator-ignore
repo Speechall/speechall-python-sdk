@@ -21,3 +21,17 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+# Custom files to preserve during regeneration
+example_transcribe.py
+simple_example.py
+EXAMPLE_README.md
+REGENERATION_GUIDE.md
+pyproject.toml
+uv.lock
+.venv/**
+*.pyc
+__pycache__/**
+Makefile
+regenerate.sh
+fix_transcription_response.py

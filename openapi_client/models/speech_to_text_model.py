@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import date
+from datetime import date, datetime
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, validator
 from openapi_client.models.transcription_model_identifier import TranscriptionModelIdentifier
@@ -76,6 +76,35 @@ class SpeechToTextModel(BaseModel):
 
         if value not in ('basic', 'standard', 'enhanced', 'premium',):
             raise ValueError("must be one of enum values ('basic', 'standard', 'enhanced', 'premium')")
+        return value
+
+    @validator('release_date', pre=True)
+    def parse_release_date(cls, value):
+        """Parse release_date from various string formats"""
+        if value is None or isinstance(value, date):
+            return value
+        
+        if isinstance(value, str):
+            # Try common date formats
+            date_formats = [
+                '%Y-%m-%d',          # ISO format: 2023-12-25
+                '%m/%d/%Y',          # US format: 12/25/2023
+                '%d/%m/%Y',          # European format: 25/12/2023
+                '%Y-%m-%dT%H:%M:%S', # ISO datetime format
+                '%Y-%m-%dT%H:%M:%SZ',# ISO datetime with Z
+                '%Y-%m-%d %H:%M:%S', # Space separated datetime
+            ]
+            
+            for fmt in date_formats:
+                try:
+                    parsed_datetime = datetime.strptime(value, fmt)
+                    return parsed_datetime.date()
+                except ValueError:
+                    continue
+            
+            # If no format works, try to return None to avoid errors
+            return None
+        
         return value
 
     class Config:
