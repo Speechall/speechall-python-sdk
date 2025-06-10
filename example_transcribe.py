@@ -96,7 +96,13 @@ def transcribe_local_file(api_instance, file_path, model_id="openai.whisper-1", 
         )
         
         print("✅ Transcription completed!")
-        print(f"📝 Result:\n{json.dumps(result.to_dict(), indent=2, default=str)}")
+        
+        # Access the text directly
+        transcribed_text = result.actual_instance.text
+        print(f"📝 Transcribed Text:\n{transcribed_text}")
+        
+        # Also show the full result structure
+        # print(f"\n🔍 Full Result:\n{json.dumps(result.to_dict(), indent=2, default=str)}")
         
     except FileNotFoundError:
         print(f"❌ File not found: {file_path}")
@@ -182,7 +188,7 @@ def main():
     api_instance = setup_client()
     
     # Example 1: List available models
-    list_available_models(api_instance)
+    # list_available_models(api_instance)
     
     # Example 2: Transcribe a local file (you'll need to provide your own audio file)
     local_audio_file = os.path.expanduser("~/Downloads/how-dictop-works.mp3")  # Replace with your audio file path
@@ -198,8 +204,8 @@ def main():
     # transcribe_remote_url(api_instance, sample_audio_url)
     
     # Example 4: Advanced features (if you have a local audio file)
-    if Path(local_audio_file).exists():
-        transcribe_with_advanced_features(api_instance, local_audio_file)
+    # if Path(local_audio_file).exists():
+    #     transcribe_with_advanced_features(api_instance, local_audio_file)
     
     print("\n✨ Examples completed!")
     print("\n📚 Next steps:")
