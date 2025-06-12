@@ -1,14 +1,30 @@
 [project]
-name = "speechall-python-sdk"
-version = "1.0.0"
+name = "speechall"
+version = "0.1.0"
 description = "Speechall API Python SDK"
 authors = [
-    { name = "Speechall Support", email = "team@openapitools.org" }
+    { name = "Speechall", email = "info@actondon.com" }
 ]
 license = "MIT"
 readme = "README.md"
 requires-python = ">=3.8"
-keywords = ["OpenAPI", "OpenAPI-Generator", "Speechall API"]
+classifiers = [
+  "Typing :: Typed",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Operating System :: OS Independent",
+  "Operating System :: POSIX",
+  "Operating System :: MacOS",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: Microsoft :: Windows",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "License :: OSI Approved :: MIT License"
+]
+keywords = ["Speechall", "Speech-to-Text", "API", "ASR", "Transcription"]
 
 dependencies = [
     "urllib3>=1.25.3",
