@@ -1,4 +1,4 @@
-# openapi-client
+# speechall
 The Speechall REST API provides powerful and flexible speech-to-text capabilities.
 It allows you to transcribe audio files using various underlying STT providers and models,
 optionally apply custom text replacement rules, and access results in multiple formats.
@@ -20,16 +20,15 @@ Python 3.7+
 ## Installation & Usage
 ### pip install
 
-If the python package is hosted on a repository, you can install directly using:
+If the python package is hosted on PyPI, you can install directly using:
 
 ```sh
-pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
+pip install speechall
 ```
-(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git`)
 
 Then import the package:
 ```python
-import openapi_client
+import speechall
 ```
 
 ### Setuptools
@@ -43,7 +42,7 @@ python setup.py install --user
 
 Then import the package:
 ```python
-import openapi_client
+import speechall
 ```
 
 ### Tests
@@ -57,13 +56,13 @@ Please follow the [installation procedure](#installation--usage) and then run th
 ```python
 
 import time
-import openapi_client
-from openapi_client.rest import ApiException
+import speechall
+from speechall.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.speechall.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = speechall.Configuration(
     host = "https://api.speechall.com/v1"
 )
 
@@ -73,20 +72,20 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (API Key): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = speechall.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with speechall.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OpenAICompatibleSpeechToTextApi(api_client)
+    api_instance = speechall.OpenAICompatibleSpeechToTextApi(api_client)
     file = None # bytearray | The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm. 
-    model = openapi_client.TranscriptionModelIdentifier() # TranscriptionModelIdentifier | 
+    model = speechall.TranscriptionModelIdentifier() # TranscriptionModelIdentifier |
     language = 'language_example' # str | The language of the input audio. Supplying the input language in [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy and latency.  (optional)
     prompt = 'prompt_example' # str | An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.  (optional)
-    response_format = openapi_client.OpenAIAudioResponseFormat() # OpenAIAudioResponseFormat |  (optional)
+    response_format = speechall.OpenAIAudioResponseFormat() # OpenAIAudioResponseFormat |  (optional)
     temperature = 0 # float | The sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use [log probability](https://en.wikipedia.org/wiki/Log_probability) to automatically increase the temperature until certain thresholds are hit.  (optional) (default to 0)
     timestamp_granularities = ['timestamp_granularities_example'] # List[str] | The timestamp granularities to populate for this transcription. `response_format` must be set `verbose_json` to use timestamp granularities. Either or both of these options are supported: `word`, or `segment`. Note: There is no additional latency for segment timestamps, but generating word timestamps incurs additional latency.  (optional)
 

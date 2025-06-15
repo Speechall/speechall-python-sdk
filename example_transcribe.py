@@ -18,13 +18,13 @@ import sys
 from pathlib import Path
 import json
 
-from openapi_client import ApiClient, Configuration
-from openapi_client.api.speech_to_text_api import SpeechToTextApi
-from openapi_client.models.transcription_model_identifier import TranscriptionModelIdentifier
-from openapi_client.models.transcript_language_code import TranscriptLanguageCode
-from openapi_client.models.transcript_output_format import TranscriptOutputFormat
-from openapi_client.models.remote_transcription_configuration import RemoteTranscriptionConfiguration
-from openapi_client.exceptions import ApiException
+from speechall import ApiClient, Configuration
+from speechall.api.speech_to_text_api import SpeechToTextApi
+from speechall.models.transcription_model_identifier import TranscriptionModelIdentifier
+from speechall.models.transcript_language_code import TranscriptLanguageCode
+from speechall.models.transcript_output_format import TranscriptOutputFormat
+from speechall.models.remote_transcription_configuration import RemoteTranscriptionConfiguration
+from speechall.exceptions import ApiException
 
 
 def setup_client():

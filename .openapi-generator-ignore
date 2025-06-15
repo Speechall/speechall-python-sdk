@@ -35,3 +35,6 @@ __pycache__/**
 Makefile
 regenerate.sh
 fix_transcription_response.py
+
+# Ignore OpenAI-Compatible Speech-to-Text Endpoints
+OpenAI-Compatible Speech-to-Text

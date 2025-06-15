@@ -9,6 +9,7 @@ set -e  # Exit on any error
 OPENAPI_SPEC_PATH="../speechall-openapi/openapi.yaml"
 GENERATOR="python-pydantic-v1"
 OUTPUT_DIR="."
+TEMP_OUTPUT_DIR="./temp_generated_client"
 
 # Colors for output
 RED='\033[0;31m'
@@ -57,26 +58,64 @@ done
 
 # Regenerate the client
 echo ""
-echo -e "${BLUE}🔧 Regenerating OpenAPI client...${NC}"
+echo -e "${BLUE}🔧 Regenerating OpenAPI client into temporary directory...${NC}"
+# Create or clean the temporary directory
+rm -rf "$TEMP_OUTPUT_DIR"
+mkdir -p "$TEMP_OUTPUT_DIR"
+
 openapi-generator generate \
     -i "$OPENAPI_SPEC_PATH" \
     -g "$GENERATOR" \
-    -o "$OUTPUT_DIR" \
+    -o "$TEMP_OUTPUT_DIR" \
+    --package-name speechall \
     --skip-validate-spec
 
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✅ Client regeneration completed successfully!${NC}"
+    echo -e "${GREEN}✅ Client regeneration into temporary directory completed successfully!${NC}"
 else
     echo -e "${RED}❌ Client regeneration failed!${NC}"
+    rm -rf "$TEMP_OUTPUT_DIR" # Clean up temp dir on failure
     exit 1
 fi
 
+echo -e "${BLUE}🔄 Syncing generated files to output directory...${NC}"
+# Remove old generated directories and files from the primary output directory
+# Be careful here not to delete essential non-generated files.
+# Common generated items: speechall/, openapi_client/, docs/, test/, tests/, README.md, setup.py, .openapi-generator-ignore, tox.ini (sometimes)
+# The custom files backed up are: example_transcribe.py, simple_example.py, EXAMPLE_README.md, pyproject.toml
+# So, it should be safe to remove these:
+rm -rf \
+    "$OUTPUT_DIR/speechall" \
+    "$OUTPUT_DIR/openapi_client" \
+    "$OUTPUT_DIR/docs" \
+    "$OUTPUT_DIR/test" \
+    "$OUTPUT_DIR/tests" \
+    "$OUTPUT_DIR/README.md" \
+    "$OUTPUT_DIR/setup.py" \
+    "$OUTPUT_DIR/.openapi-generator-ignore" \
+    "$OUTPUT_DIR/tox.ini" \
+    "$OUTPUT_DIR/git_push.sh" \
+    "$OUTPUT_DIR/requirements.txt" # This was deleted in a previous step, but good to include
+
+# Using rsync to copy, which is generally robust. -a preserves attributes.
+# Ensure trailing slash on source for rsync to copy contents.
+# Removed --delete as rm -rf above should handle major cleaning.
+rsync -av "$TEMP_OUTPUT_DIR/" "$OUTPUT_DIR/"
+
+echo -e "${GREEN}✅ Sync complete.${NC}"
+
 # Restore custom pyproject.toml if backup exists
+# This must happen AFTER rsync, as rsync would have overwritten pyproject.toml
 if [ -f "$BACKUP_DIR/pyproject.toml" ]; then
     echo -e "${YELLOW}🔧 Restoring custom pyproject.toml...${NC}"
-    cp "$BACKUP_DIR/pyproject.toml" pyproject.toml
+    cp "$BACKUP_DIR/pyproject.toml" "$OUTPUT_DIR/pyproject.toml"
     echo "  ✅ Custom pyproject.toml restored"
 fi
+
+# Clean up temporary directory
+echo -e "${YELLOW}🧹 Cleaning up temporary directory...${NC}"
+rm -rf "$TEMP_OUTPUT_DIR"
+echo "  ✅ Temporary directory cleaned up."
 
 # Apply automatic fixes for known issues
 echo ""
@@ -99,8 +138,14 @@ if command -v uv &> /dev/null; then
     uv sync
     echo -e "${GREEN}✅ Dependencies updated with uv${NC}"
 else
-    pip install -r requirements.txt
-    echo -e "${GREEN}✅ Dependencies updated with pip${NC}"
+    # requirements.txt was deleted, setup.py handles dependencies via pyproject.toml
+    # Forcing reinstall based on pyproject.toml if uv is present
+    uv pip install .
+    echo -e "${GREEN}✅ Dependencies updated with uv (from pyproject.toml)${NC}"
+else
+    # pip install -r requirements.txt # requirements.txt is no longer used
+    pip install . # Install from pyproject.toml / setup.py
+    echo -e "${GREEN}✅ Dependencies updated with pip (from pyproject.toml)${NC}"
 fi
 
 # Clean up old backup if successful

@@ -6,10 +6,10 @@ Set your API token: export SPEECHALL_API_TOKEN="your-token-here"
 """
 
 import os
-from openapi_client import ApiClient, Configuration
-from openapi_client.api.speech_to_text_api import SpeechToTextApi
-from openapi_client.models.transcription_model_identifier import TranscriptionModelIdentifier
-from openapi_client.models.transcript_language_code import TranscriptLanguageCode
+from speechall import ApiClient, Configuration
+from speechall.api.speech_to_text_api import SpeechToTextApi
+from speechall.models.transcription_model_identifier import TranscriptionModelIdentifier
+from speechall.models.transcript_language_code import TranscriptLanguageCode
 
 # Set up the API client
 configuration = Configuration()

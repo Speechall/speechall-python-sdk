@@ -20,8 +20,8 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "openapi-client"
-VERSION = "1.0.0"
+NAME = "speechall"
+VERSION = "0.1.0"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
     "urllib3 >= 1.25.3, < 3.0.0",
@@ -30,12 +30,15 @@ REQUIRES = [
     "aenum"
 ]
 
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
 setup(
     name=NAME,
     version=VERSION,
     description="Speechall API",
-    author="Speechall Support",
-    author_email="team@openapitools.org",
+    author="Speechall",
+    author_email="info@actondon.com",
     url="",
     keywords=["OpenAPI", "OpenAPI-Generator", "Speechall API"],
     install_requires=REQUIRES,
@@ -43,8 +46,6 @@ setup(
     include_package_data=True,
     license="MIT",
     long_description_content_type='text/markdown',
-    long_description="""\
-    The Speechall REST API provides powerful and flexible speech-to-text capabilities. It allows you to transcribe audio files using various underlying STT providers and models, optionally apply custom text replacement rules, and access results in multiple formats. The API includes standard endpoints for transcription and endpoints compatible with the OpenAI API structure. 
-    """,  # noqa: E501
-    package_data={"openapi_client": ["py.typed"]},
+    long_description=long_description,  # noqa: E501
+    package_data={"speechall": ["py.typed"]},
 )
