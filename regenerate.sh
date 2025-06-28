@@ -100,7 +100,7 @@ openapi-generator generate \
     -o "$TEMP_OUTPUT_DIR" \
     --package-name speechall \
     --skip-validate-spec \
-    --additional-properties="packageVersion=0.1.0"
+    --additional-properties="packageVersion=0.2.0"
 
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✅ Client regeneration into temporary directory completed successfully!${NC}"

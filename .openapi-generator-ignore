@@ -41,3 +41,5 @@ fix_dual_format_responses.py
 .openapi-generator-ignore
 # Ignore OpenAI-Compatible Speech-to-Text Endpoints
 speechall/api/open_ai_compatible_speech_to_text_api.py
+.github/workflows/python.yml
+README.md
