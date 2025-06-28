@@ -15,7 +15,7 @@ import re
 def apply_transcription_response_fix():
     """Apply the fix to TranscriptionResponse."""
     
-    target_file = "openapi_client/models/transcription_response.py"
+    target_file = "speechall/models/transcription_response.py"
     
     if not os.path.exists(target_file):
         print(f"❌ File not found: {target_file}")
@@ -163,7 +163,7 @@ def apply_transcription_response_fix():
 def apply_release_date_fix():
     """Apply the fix to SpeechToTextModel release_date field."""
     
-    target_file = "openapi_client/models/speech_to_text_model.py"
+    target_file = "speechall/models/speech_to_text_model.py"
     
     if not os.path.exists(target_file):
         print(f"❌ File not found: {target_file}")
