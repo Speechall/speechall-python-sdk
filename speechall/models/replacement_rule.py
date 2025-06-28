@@ -20,9 +20,9 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.exact_rule import ExactRule
-from openapi_client.models.regex_group_rule import RegexGroupRule
-from openapi_client.models.regex_rule import RegexRule
+from speechall.models.exact_rule import ExactRule
+from speechall.models.regex_group_rule import RegexGroupRule
+from speechall.models.regex_rule import RegexRule
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 

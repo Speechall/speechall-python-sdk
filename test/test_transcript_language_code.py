@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.transcript_language_code import TranscriptLanguageCode  # noqa: E501
+from speechall.models.transcript_language_code import TranscriptLanguageCode  # noqa: E501
 
 class TestTranscriptLanguageCode(unittest.TestCase):
     """TranscriptLanguageCode unit test stubs"""

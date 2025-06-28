@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.transcription_provider import TranscriptionProvider  # noqa: E501
+from speechall.models.transcription_provider import TranscriptionProvider  # noqa: E501
 
 class TestTranscriptionProvider(unittest.TestCase):
     """TranscriptionProvider unit test stubs"""

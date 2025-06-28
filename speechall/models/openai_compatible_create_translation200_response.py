@@ -20,8 +20,6 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.open_ai_create_translation_response_json import OpenAICreateTranslationResponseJson
-from openapi_client.models.open_ai_create_translation_response_verbose_json import OpenAICreateTranslationResponseVerboseJson
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 

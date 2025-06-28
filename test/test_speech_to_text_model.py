@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.speech_to_text_model import SpeechToTextModel  # noqa: E501
+from speechall.models.speech_to_text_model import SpeechToTextModel  # noqa: E501
 
 class TestSpeechToTextModel(unittest.TestCase):
     """SpeechToTextModel unit test stubs"""

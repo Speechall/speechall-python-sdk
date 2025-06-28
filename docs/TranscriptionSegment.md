@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.transcription_segment import TranscriptionSegment
+from speechall.models.transcription_segment import TranscriptionSegment
 
 # TODO update the JSON string below
 json = "{}"

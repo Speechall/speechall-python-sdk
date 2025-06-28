@@ -21,12 +21,12 @@ from pydantic import validate_arguments, ValidationError
 from typing_extensions import Annotated
 from pydantic import Field
 
-from openapi_client.models.create_replacement_ruleset201_response import CreateReplacementRuleset201Response
-from openapi_client.models.create_replacement_ruleset_request import CreateReplacementRulesetRequest
+from speechall.models.create_replacement_ruleset201_response import CreateReplacementRuleset201Response
+from speechall.models.create_replacement_ruleset_request import CreateReplacementRulesetRequest
 
-from openapi_client.api_client import ApiClient
-from openapi_client.api_response import ApiResponse
-from openapi_client.exceptions import (  # noqa: F401
+from speechall.api_client import ApiClient
+from speechall.api_response import ApiResponse
+from speechall.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )

@@ -38,7 +38,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.speech_to_text_model import SpeechToTextModel
+from speechall.models.speech_to_text_model import SpeechToTextModel
 
 # TODO update the JSON string below
 json = "{}"

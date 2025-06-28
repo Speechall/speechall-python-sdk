@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.create_replacement_ruleset_request import CreateReplacementRulesetRequest
+from speechall.models.create_replacement_ruleset_request import CreateReplacementRulesetRequest
 
 # TODO update the JSON string below
 json = "{}"

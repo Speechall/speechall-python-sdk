@@ -1,4 +1,4 @@
-# openapi_client.ReplacementRulesApi
+# speechall.ReplacementRulesApi
 
 All URIs are relative to *https://api.speechall.com/v1*
 
@@ -22,15 +22,15 @@ Rules within a set are applied sequentially to the transcription text.
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.create_replacement_ruleset201_response import CreateReplacementRuleset201Response
-from openapi_client.models.create_replacement_ruleset_request import CreateReplacementRulesetRequest
-from openapi_client.rest import ApiException
+import speechall
+from speechall.models.create_replacement_ruleset201_response import CreateReplacementRuleset201Response
+from speechall.models.create_replacement_ruleset_request import CreateReplacementRulesetRequest
+from speechall.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.speechall.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = speechall.Configuration(
     host = "https://api.speechall.com/v1"
 )
 
@@ -40,14 +40,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (API Key): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = speechall.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with speechall.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ReplacementRulesApi(api_client)
+    api_instance = speechall.ReplacementRulesApi(api_client)
     create_replacement_ruleset_request = {"name":"Acme Corp Corrections","rules":[{"kind":"exact","search":"speechal","replacement":"Speechall","caseSensitive":false},{"kind":"regex","pattern":"\\b(\\d{3})-(\\d{2})-(\\d{4})\\b","replacement":"[REDACTED SSN]","flags":["i"]}]} # CreateReplacementRulesetRequest | JSON object containing the name for the ruleset and an array of replacement rule objects.
 
     try:

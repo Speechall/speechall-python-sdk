@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.open_ai_create_translation_request_model import OpenAICreateTranslationRequestModel  # noqa: E501
+from speechall.models.open_ai_create_translation_request_model import OpenAICreateTranslationRequestModel  # noqa: E501
 
 class TestOpenAICreateTranslationRequestModel(unittest.TestCase):
     """OpenAICreateTranslationRequestModel unit test stubs"""

@@ -68,7 +68,8 @@ openapi-generator generate \
     -g "$GENERATOR" \
     -o "$TEMP_OUTPUT_DIR" \
     --package-name speechall \
-    --skip-validate-spec
+    --skip-validate-spec \
+    --additional-properties="packageVersion=0.1.0"
 
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✅ Client regeneration into temporary directory completed successfully!${NC}"
@@ -110,6 +111,14 @@ if [ -f "$BACKUP_DIR/pyproject.toml" ]; then
     echo -e "${YELLOW}🔧 Restoring custom pyproject.toml...${NC}"
     cp "$BACKUP_DIR/pyproject.toml" "$OUTPUT_DIR/pyproject.toml"
     echo "  ✅ Custom pyproject.toml restored"
+fi
+
+# Fix hardcoded author information in setup.py
+echo -e "${YELLOW}🔧 Fixing author information in setup.py...${NC}"
+if [ -f "$OUTPUT_DIR/setup.py" ]; then
+    sed -i '' 's/author="Speechall Support"/author="Speechall"/' "$OUTPUT_DIR/setup.py"
+    sed -i '' 's/author_email="team@openapitools.org"/author_email="info@actondon.com"/' "$OUTPUT_DIR/setup.py"
+    echo "  ✅ Author information updated in setup.py"
 fi
 
 # Clean up temporary directory

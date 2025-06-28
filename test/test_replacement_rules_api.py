@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.replacement_rules_api import ReplacementRulesApi  # noqa: E501
+from speechall.api.replacement_rules_api import ReplacementRulesApi  # noqa: E501
 
 
 class TestReplacementRulesApi(unittest.TestCase):

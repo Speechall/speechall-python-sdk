@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.exact_rule import ExactRule  # noqa: E501
+from speechall.models.exact_rule import ExactRule  # noqa: E501
 
 class TestExactRule(unittest.TestCase):
     """ExactRule unit test stubs"""

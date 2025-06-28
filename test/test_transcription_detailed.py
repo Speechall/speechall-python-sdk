@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.transcription_detailed import TranscriptionDetailed  # noqa: E501
+from speechall.models.transcription_detailed import TranscriptionDetailed  # noqa: E501
 
 class TestTranscriptionDetailed(unittest.TestCase):
     """TranscriptionDetailed unit test stubs"""
@@ -41,7 +41,7 @@ class TestTranscriptionDetailed(unittest.TestCase):
                 language = 'en',
                 duration = 15.75,
                 segments = [
-                    openapi_client.models.transcription_segment.TranscriptionSegment(
+                    speechall.models.transcription_segment.TranscriptionSegment(
                         start = 0.5, 
                         end = 4.25, 
                         text = 'Hello world.', 
@@ -49,7 +49,7 @@ class TestTranscriptionDetailed(unittest.TestCase):
                         confidence = 0.95, )
                     ],
                 words = [
-                    openapi_client.models.transcription_word.TranscriptionWord(
+                    speechall.models.transcription_word.TranscriptionWord(
                         start = 0.5, 
                         end = 4.25, 
                         word = 'Hello', 

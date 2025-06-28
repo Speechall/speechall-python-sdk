@@ -20,8 +20,8 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from openapi_client.models.transcription_detailed import TranscriptionDetailed
-from openapi_client.models.transcription_only_text import TranscriptionOnlyText
+from speechall.models.transcription_detailed import TranscriptionDetailed
+from speechall.models.transcription_only_text import TranscriptionOnlyText
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 

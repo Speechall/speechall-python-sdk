@@ -20,9 +20,9 @@ import json
 
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field, StrictBool, StrictStr, confloat, conint, conlist, validator
-from openapi_client.models.transcript_language_code import TranscriptLanguageCode
-from openapi_client.models.transcript_output_format import TranscriptOutputFormat
-from openapi_client.models.transcription_model_identifier import TranscriptionModelIdentifier
+from speechall.models.transcript_language_code import TranscriptLanguageCode
+from speechall.models.transcript_output_format import TranscriptOutputFormat
+from speechall.models.transcription_model_identifier import TranscriptionModelIdentifier
 
 class BaseTranscriptionConfiguration(BaseModel):
     """

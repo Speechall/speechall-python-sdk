@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.regex_rule import RegexRule
+from speechall.models.regex_rule import RegexRule
 
 # TODO update the JSON string below
 json = "{}"

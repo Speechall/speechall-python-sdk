@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.error_response import ErrorResponse  # noqa: E501
+from speechall.models.error_response import ErrorResponse  # noqa: E501
 
 class TestErrorResponse(unittest.TestCase):
     """ErrorResponse unit test stubs"""

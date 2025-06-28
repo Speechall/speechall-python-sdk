@@ -25,11 +25,11 @@ import tempfile
 from urllib.parse import quote
 from pydantic import SecretStr
 
-from openapi_client.configuration import Configuration
-from openapi_client.api_response import ApiResponse
-import openapi_client.models
-from openapi_client import rest
-from openapi_client.exceptions import ApiValueError, ApiException
+from speechall.configuration import Configuration
+from speechall.api_response import ApiResponse
+import speechall.models
+from speechall import rest
+from speechall.exceptions import ApiValueError, ApiException
 
 
 class ApiClient:
@@ -77,7 +77,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/1.0.0/python'
+        self.user_agent = 'OpenAPI-Generator/0.1.0/python'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):
@@ -351,7 +351,7 @@ class ApiClient:
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(openapi_client.models, klass)
+                klass = getattr(speechall.models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)

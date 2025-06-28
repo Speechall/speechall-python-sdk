@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.transcription_segment import TranscriptionSegment  # noqa: E501
+from speechall.models.transcription_segment import TranscriptionSegment  # noqa: E501
 
 class TestTranscriptionSegment(unittest.TestCase):
     """TranscriptionSegment unit test stubs"""

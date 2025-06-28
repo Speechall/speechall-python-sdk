@@ -20,8 +20,8 @@ import json
 
 from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
-from openapi_client.models.transcription_segment import TranscriptionSegment
-from openapi_client.models.transcription_word import TranscriptionWord
+from speechall.models.transcription_segment import TranscriptionSegment
+from speechall.models.transcription_word import TranscriptionWord
 
 class TranscriptionDetailed(BaseModel):
     """

@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.base_transcription_configuration import BaseTranscriptionConfiguration  # noqa: E501
+from speechall.models.base_transcription_configuration import BaseTranscriptionConfiguration  # noqa: E501
 
 class TestBaseTranscriptionConfiguration(unittest.TestCase):
     """BaseTranscriptionConfiguration unit test stubs"""

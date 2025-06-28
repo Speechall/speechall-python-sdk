@@ -1,4 +1,4 @@
-# openapi_client.SpeechToTextApi
+# speechall.SpeechToTextApi
 
 All URIs are relative to *https://api.speechall.com/v1*
 
@@ -26,14 +26,14 @@ Use this endpoint to discover available models and their capabilities before mak
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.speech_to_text_model import SpeechToTextModel
-from openapi_client.rest import ApiException
+import speechall
+from speechall.models.speech_to_text_model import SpeechToTextModel
+from speechall.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.speechall.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = speechall.Configuration(
     host = "https://api.speechall.com/v1"
 )
 
@@ -43,14 +43,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (API Key): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = speechall.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with speechall.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SpeechToTextApi(api_client)
+    api_instance = speechall.SpeechToTextApi(api_client)
 
     try:
         # Retrieve a list of all available speech-to-text models.
@@ -110,17 +110,17 @@ Suitable for transcribing local audio files.
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.transcript_language_code import TranscriptLanguageCode
-from openapi_client.models.transcript_output_format import TranscriptOutputFormat
-from openapi_client.models.transcription_model_identifier import TranscriptionModelIdentifier
-from openapi_client.models.transcription_response import TranscriptionResponse
-from openapi_client.rest import ApiException
+import speechall
+from speechall.models.transcript_language_code import TranscriptLanguageCode
+from speechall.models.transcript_output_format import TranscriptOutputFormat
+from speechall.models.transcription_model_identifier import TranscriptionModelIdentifier
+from speechall.models.transcription_response import TranscriptionResponse
+from speechall.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.speechall.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = speechall.Configuration(
     host = "https://api.speechall.com/v1"
 )
 
@@ -130,18 +130,18 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (API Key): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = speechall.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with speechall.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SpeechToTextApi(api_client)
-    model = openapi_client.TranscriptionModelIdentifier() # TranscriptionModelIdentifier | The identifier of the speech-to-text model to use for the transcription, in the format `provider.model`. See the `/speech-to-text-models` endpoint for available models.
+    api_instance = speechall.SpeechToTextApi(api_client)
+    model = speechall.TranscriptionModelIdentifier() # TranscriptionModelIdentifier | The identifier of the speech-to-text model to use for the transcription, in the format `provider.model`. See the `/speech-to-text-models` endpoint for available models.
     body = None # bytearray | The audio file to transcribe. Send the raw audio data as the request body. Supported formats typically include WAV, MP3, FLAC, Ogg, M4A, etc., depending on the chosen model/provider. Check provider documentation for specific limits on file size and duration.
-    language = openapi_client.TranscriptLanguageCode() # TranscriptLanguageCode | The language of the audio file in ISO 639-1 format (e.g., `en`, `es`, `fr`). Specify `auto` for automatic language detection (if supported by the model). Defaults to `en` if not provided. Providing the correct language improves accuracy and latency. (optional)
-    output_format = openapi_client.TranscriptOutputFormat() # TranscriptOutputFormat | The desired format for the transcription output. Can be plain text, JSON objects (simple or detailed), or subtitle formats (SRT, VTT). Defaults to `text`. (optional)
+    language = speechall.TranscriptLanguageCode() # TranscriptLanguageCode | The language of the audio file in ISO 639-1 format (e.g., `en`, `es`, `fr`). Specify `auto` for automatic language detection (if supported by the model). Defaults to `en` if not provided. Providing the correct language improves accuracy and latency. (optional)
+    output_format = speechall.TranscriptOutputFormat() # TranscriptOutputFormat | The desired format for the transcription output. Can be plain text, JSON objects (simple or detailed), or subtitle formats (SRT, VTT). Defaults to `text`. (optional)
     ruleset_id = 'ruleset_id_example' # str | The unique identifier (UUID) of a pre-defined replacement ruleset to apply to the final transcription text. Create rulesets using the `/replacement-rulesets` endpoint. (optional)
     punctuation = True # bool | Enable automatic punctuation (commas, periods, question marks) in the transcription. Support varies by model/provider (e.g., Deepgram, AssemblyAI). Defaults to `true`. (optional) (default to True)
     timestamp_granularity = 'segment' # str | Specifies the level of detail for timestamps in the response (if `output_format` is `json` or `verbose_json`). `segment` provides timestamps for larger chunks of speech, while `word` provides timestamps for individual words (may increase latency). Defaults to `segment`. (optional) (default to 'segment')
@@ -225,15 +225,15 @@ Useful for transcribing files already stored online.
 ```python
 import time
 import os
-import openapi_client
-from openapi_client.models.remote_transcription_configuration import RemoteTranscriptionConfiguration
-from openapi_client.models.transcription_response import TranscriptionResponse
-from openapi_client.rest import ApiException
+import speechall
+from speechall.models.remote_transcription_configuration import RemoteTranscriptionConfiguration
+from speechall.models.transcription_response import TranscriptionResponse
+from speechall.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.speechall.com/v1
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = speechall.Configuration(
     host = "https://api.speechall.com/v1"
 )
 
@@ -243,14 +243,14 @@ configuration = openapi_client.Configuration(
 # satisfies your auth use case.
 
 # Configure Bearer authorization (API Key): bearerAuth
-configuration = openapi_client.Configuration(
+configuration = speechall.Configuration(
     access_token = os.environ["BEARER_TOKEN"]
 )
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with speechall.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SpeechToTextApi(api_client)
+    api_instance = speechall.SpeechToTextApi(api_client)
     remote_transcription_configuration = {"file_url":"https://example.com/path/to/audio.mp3","model":"openai.whisper-1","language":"en","output_format":"json","diarization":true} # RemoteTranscriptionConfiguration | JSON object containing the URL of the audio file and the desired transcription options.
 
     try:

@@ -14,7 +14,7 @@
 
 import unittest
 
-from openapi_client.api.speech_to_text_api import SpeechToTextApi  # noqa: E501
+from speechall.api.speech_to_text_api import SpeechToTextApi  # noqa: E501
 
 
 class TestSpeechToTextApi(unittest.TestCase):

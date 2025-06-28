@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.remote_transcription_configuration import RemoteTranscriptionConfiguration  # noqa: E501
+from speechall.models.remote_transcription_configuration import RemoteTranscriptionConfiguration  # noqa: E501
 
 class TestRemoteTranscriptionConfiguration(unittest.TestCase):
     """RemoteTranscriptionConfiguration unit test stubs"""

@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.transcript_output_format import TranscriptOutputFormat  # noqa: E501
+from speechall.models.transcript_output_format import TranscriptOutputFormat  # noqa: E501
 
 class TestTranscriptOutputFormat(unittest.TestCase):
     """TranscriptOutputFormat unit test stubs"""

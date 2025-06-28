@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.replacement_rule import ReplacementRule
+from speechall.models.replacement_rule import ReplacementRule
 
 # TODO update the JSON string below
 json = "{}"

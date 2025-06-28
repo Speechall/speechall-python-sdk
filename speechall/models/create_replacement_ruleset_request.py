@@ -20,7 +20,7 @@ import json
 
 from typing import List
 from pydantic import BaseModel, Field, StrictStr, conlist
-from openapi_client.models.replacement_rule import ReplacementRule
+from speechall.models.replacement_rule import ReplacementRule
 
 class CreateReplacementRulesetRequest(BaseModel):
     """

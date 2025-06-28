@@ -466,8 +466,8 @@ wheels = [
 ]
 
 [[package]]
-name = "speechall-python-sdk"
-version = "1.0.0"
+name = "speechall"
+version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "aenum" },

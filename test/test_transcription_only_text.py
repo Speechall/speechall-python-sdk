@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.transcription_only_text import TranscriptionOnlyText  # noqa: E501
+from speechall.models.transcription_only_text import TranscriptionOnlyText  # noqa: E501
 
 class TestTranscriptionOnlyText(unittest.TestCase):
     """TranscriptionOnlyText unit test stubs"""

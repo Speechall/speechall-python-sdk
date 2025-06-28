@@ -30,9 +30,6 @@ REQUIRES = [
     "aenum"
 ]
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
-
 setup(
     name=NAME,
     version=VERSION,
@@ -46,6 +43,8 @@ setup(
     include_package_data=True,
     license="MIT",
     long_description_content_type='text/markdown',
-    long_description=long_description,  # noqa: E501
+    long_description="""\
+    The Speechall REST API provides powerful and flexible speech-to-text capabilities. It allows you to transcribe audio files using various underlying STT providers and models, optionally apply custom text replacement rules, and access results in multiple formats. The API includes standard endpoints for transcription and endpoints compatible with the OpenAI API structure. 
+    """,  # noqa: E501
     package_data={"speechall": ["py.typed"]},
 )

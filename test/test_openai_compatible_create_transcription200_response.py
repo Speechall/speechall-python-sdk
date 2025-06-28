@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.openai_compatible_create_transcription200_response import OpenaiCompatibleCreateTranscription200Response  # noqa: E501
+from speechall.models.openai_compatible_create_transcription200_response import OpenaiCompatibleCreateTranscription200Response  # noqa: E501
 
 class TestOpenaiCompatibleCreateTranscription200Response(unittest.TestCase):
     """OpenaiCompatibleCreateTranscription200Response unit test stubs"""
@@ -40,13 +40,13 @@ class TestOpenaiCompatibleCreateTranscription200Response(unittest.TestCase):
                 duration = 1.337,
                 text = '',
                 words = [
-                    openapi_client.models.open_ai_transcription_word.OpenAI_TranscriptionWord(
+                    speechall.models.open_ai_transcription_word.OpenAI_TranscriptionWord(
                         word = '', 
                         start = 1.337, 
                         end = 1.337, )
                     ],
                 segments = [
-                    openapi_client.models.open_ai_transcription_segment.OpenAI_TranscriptionSegment(
+                    speechall.models.open_ai_transcription_segment.OpenAI_TranscriptionSegment(
                         id = 56, 
                         seek = 56, 
                         start = 1.337, 

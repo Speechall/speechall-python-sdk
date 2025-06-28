@@ -20,8 +20,8 @@ import json
 from datetime import date, datetime
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, validator
-from openapi_client.models.transcription_model_identifier import TranscriptionModelIdentifier
-from openapi_client.models.transcription_provider import TranscriptionProvider
+from speechall.models.transcription_model_identifier import TranscriptionModelIdentifier
+from speechall.models.transcription_provider import TranscriptionProvider
 
 class SpeechToTextModel(BaseModel):
     """

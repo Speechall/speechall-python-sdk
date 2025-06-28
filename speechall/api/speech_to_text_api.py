@@ -23,16 +23,16 @@ from pydantic import Field, StrictBool, StrictBytes, StrictStr, confloat, conint
 
 from typing import List, Optional, Union
 
-from openapi_client.models.remote_transcription_configuration import RemoteTranscriptionConfiguration
-from openapi_client.models.speech_to_text_model import SpeechToTextModel
-from openapi_client.models.transcript_language_code import TranscriptLanguageCode
-from openapi_client.models.transcript_output_format import TranscriptOutputFormat
-from openapi_client.models.transcription_model_identifier import TranscriptionModelIdentifier
-from openapi_client.models.transcription_response import TranscriptionResponse
+from speechall.models.remote_transcription_configuration import RemoteTranscriptionConfiguration
+from speechall.models.speech_to_text_model import SpeechToTextModel
+from speechall.models.transcript_language_code import TranscriptLanguageCode
+from speechall.models.transcript_output_format import TranscriptOutputFormat
+from speechall.models.transcription_model_identifier import TranscriptionModelIdentifier
+from speechall.models.transcription_response import TranscriptionResponse
 
-from openapi_client.api_client import ApiClient
-from openapi_client.api_response import ApiResponse
-from openapi_client.exceptions import (  # noqa: F401
+from speechall.api_client import ApiClient
+from speechall.api_response import ApiResponse
+from speechall.exceptions import (  # noqa: F401
     ApiTypeError,
     ApiValueError
 )

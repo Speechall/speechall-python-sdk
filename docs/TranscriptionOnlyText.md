@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.transcription_only_text import TranscriptionOnlyText
+from speechall.models.transcription_only_text import TranscriptionOnlyText
 
 # TODO update the JSON string below
 json = "{}"

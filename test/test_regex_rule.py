@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.regex_rule import RegexRule  # noqa: E501
+from speechall.models.regex_rule import RegexRule  # noqa: E501
 
 class TestRegexRule(unittest.TestCase):
     """RegexRule unit test stubs"""

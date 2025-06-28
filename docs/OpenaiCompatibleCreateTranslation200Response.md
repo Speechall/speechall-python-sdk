@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.openai_compatible_create_translation200_response import OpenaiCompatibleCreateTranslation200Response
+from speechall.models.openai_compatible_create_translation200_response import OpenaiCompatibleCreateTranslation200Response
 
 # TODO update the JSON string below
 json = "{}"

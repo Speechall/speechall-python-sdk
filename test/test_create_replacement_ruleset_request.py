@@ -15,7 +15,7 @@
 import unittest
 import datetime
 
-from openapi_client.models.create_replacement_ruleset_request import CreateReplacementRulesetRequest  # noqa: E501
+from speechall.models.create_replacement_ruleset_request import CreateReplacementRulesetRequest  # noqa: E501
 
 class TestCreateReplacementRulesetRequest(unittest.TestCase):
     """CreateReplacementRulesetRequest unit test stubs"""
