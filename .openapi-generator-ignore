@@ -35,6 +35,8 @@ __pycache__/**
 Makefile
 regenerate.sh
 fix_transcription_response.py
+fix_accept_header.py
+fix_dual_format_responses.py
 .gitignore
 .openapi-generator-ignore
 # Ignore OpenAI-Compatible Speech-to-Text Endpoints

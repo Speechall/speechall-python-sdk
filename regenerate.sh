@@ -182,6 +182,8 @@ echo "  ✅ Temporary directory cleaned up."
 # Apply automatic fixes for known issues
 echo ""
 echo -e "${BLUE}🔧 Applying automatic fixes...${NC}"
+
+# Fix TranscriptionResponse oneOf issue
 if [ -f "fix_transcription_response.py" ]; then
     python3 fix_transcription_response.py
     if [ $? -eq 0 ]; then
@@ -191,6 +193,30 @@ if [ -f "fix_transcription_response.py" ]; then
     fi
 else
     echo -e "${YELLOW}  ⚠️  fix_transcription_response.py not found - skipping automatic fix${NC}"
+fi
+
+# Fix Accept header to use */* instead of prioritizing JSON
+if [ -f "fix_accept_header.py" ]; then
+    python3 fix_accept_header.py
+    if [ $? -eq 0 ]; then
+        echo "  ✅ Accept header fix applied"
+    else
+        echo -e "${YELLOW}  ⚠️  Accept header fix failed - you may need to apply it manually${NC}"
+    fi
+else
+    echo -e "${YELLOW}  ⚠️  fix_accept_header.py not found - skipping automatic fix${NC}"
+fi
+
+# Fix dual-format responses (JSON and text/plain based on Content-Type)
+if [ -f "fix_dual_format_responses.py" ]; then
+    python3 fix_dual_format_responses.py
+    if [ $? -eq 0 ]; then
+        echo "  ✅ Dual-format response fix applied"
+    else
+        echo -e "${YELLOW}  ⚠️  Dual-format response fix failed - you may need to apply it manually${NC}"
+    fi
+else
+    echo -e "${YELLOW}  ⚠️  fix_dual_format_responses.py not found - skipping automatic fix${NC}"
 fi
 
 # Reinstall dependencies

@@ -245,7 +245,14 @@ class ApiClient:
           if response_type == "bytearray":
               return_data = response_data.data
           elif response_type:
-              return_data = self.deserialize(response_data, response_type)
+              # Check for dual-format responses (JSON or plain text)
+              content_type = response_data.getheader('content-type')
+              if content_type and 'text/plain' in content_type.lower():
+                  # For text/plain responses, return the raw string data
+                  return_data = response_data.data
+              else:
+                  # For JSON responses, deserialize normally
+                  return_data = self.deserialize(response_data, response_type)
           else:
               return_data = None
 
@@ -590,16 +597,13 @@ class ApiClient:
         """Returns `Accept` based on an array of accepts provided.
 
         :param accepts: List of headers.
-        :return: Accept (e.g. application/json).
+        :return: Accept (e.g. */*).
         """
         if not accepts:
             return
 
-        for accept in accepts:
-            if re.search('json', accept, re.IGNORECASE):
-                return accept
-
-        return accepts[0]
+        # Accept any content type instead of prioritizing JSON
+        return '*/*' 
 
     def select_header_content_type(self, content_types):
         """Returns `Content-Type` based on an array of content_types provided.

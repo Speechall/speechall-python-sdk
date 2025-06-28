@@ -14,30 +14,21 @@ from speechall.models.transcript_language_code import TranscriptLanguageCode
 # Set up the API client
 configuration = Configuration()
 configuration.access_token = os.getenv('SPEECHALL_API_TOKEN')
-configuration.host = "https://api.speechall.com/v1"
+# configuration.host = "https://api.speechall.com/v1"
+configuration.host = "http://127.0.0.1:8080/v1"
 
 api_client = ApiClient(configuration)
 api_instance = SpeechToTextApi(api_client)
 
-# Example: List available models
-try:
-    print("Available models:")
-    models = api_instance.list_speech_to_text_models()
-    for model in models[:5]:  # Show first 5
-        print(f"- {model.model_id}: {model.display_name}")
-except Exception as e:
-    print(f"Error listing models: {e}")
-
 # Example: Transcribe audio file
-audio_file_path = "your_audio_file.wav"  # Replace with your audio file
+audio_file_path = os.path.expanduser("~/Downloads/how-dictop-works.mp3")  # Replace with your audio file path
 
 if os.path.exists(audio_file_path):
     try:
         with open(audio_file_path, 'rb') as f:
             result = api_instance.transcribe(
                 model=TranscriptionModelIdentifier.OPENAI_DOT_WHISPER_MINUS_1,
-                body=f.read(),
-                language=TranscriptLanguageCode.EN
+                body=f.read()
             )
         print(f"Transcription: {result}")
     except Exception as e:
