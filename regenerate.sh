@@ -48,13 +48,44 @@ echo -e "${YELLOW}💾 Creating backup of custom files...${NC}"
 BACKUP_DIR="backup_$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$BACKUP_DIR"
 
-# Backup files if they exist
-for file in example_transcribe.py simple_example.py EXAMPLE_README.md pyproject.toml; do
-    if [ -f "$file" ]; then
-        cp "$file" "$BACKUP_DIR/"
-        echo "  ✅ Backed up $file"
-    fi
-done
+# Read .openapi-generator-ignore and backup all files listed there
+if [ -f ".openapi-generator-ignore" ]; then
+    echo "  📋 Reading .openapi-generator-ignore file..."
+    while IFS= read -r line; do
+        # Skip empty lines and comments
+        if [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]]; then
+            continue
+        fi
+        
+        # Handle different types of patterns
+        if [[ "$line" == *"/**" ]]; then
+            # Handle directory patterns like .venv/**, __pycache__/**
+            dir_pattern="${line%/**}"
+            if [ -d "$dir_pattern" ]; then
+                mkdir -p "$BACKUP_DIR/$(dirname "$dir_pattern")" 2>/dev/null
+                cp -r "$dir_pattern" "$BACKUP_DIR/$(dirname "$dir_pattern")/" 2>/dev/null
+                echo "  ✅ Backed up directory $dir_pattern"
+            fi
+        elif [[ "$line" != *"*"* ]]; then
+            # Handle simple files (with or without directory paths)
+            if [ -f "$line" ]; then
+                # Create directory structure if needed
+                mkdir -p "$BACKUP_DIR/$(dirname "$line")" 2>/dev/null
+                cp "$line" "$BACKUP_DIR/$line"
+                echo "  ✅ Backed up $line"
+            fi
+        fi
+    done < .openapi-generator-ignore
+else
+    echo "  ⚠️  .openapi-generator-ignore file not found, using fallback list"
+    # Fallback to original hardcoded list
+    for file in example_transcribe.py simple_example.py EXAMPLE_README.md pyproject.toml; do
+        if [ -f "$file" ]; then
+            cp "$file" "$BACKUP_DIR/"
+            echo "  ✅ Backed up $file"
+        fi
+    done
+fi
 
 # Regenerate the client
 echo ""
@@ -105,12 +136,34 @@ rsync -av "$TEMP_OUTPUT_DIR/" "$OUTPUT_DIR/"
 
 echo -e "${GREEN}✅ Sync complete.${NC}"
 
-# Restore custom pyproject.toml if backup exists
-# This must happen AFTER rsync, as rsync would have overwritten pyproject.toml
-if [ -f "$BACKUP_DIR/pyproject.toml" ]; then
-    echo -e "${YELLOW}🔧 Restoring custom pyproject.toml...${NC}"
-    cp "$BACKUP_DIR/pyproject.toml" "$OUTPUT_DIR/pyproject.toml"
-    echo "  ✅ Custom pyproject.toml restored"
+# Restore all backed up files
+# This must happen AFTER rsync, as rsync would have overwritten these files
+echo -e "${YELLOW}🔧 Restoring backed up files...${NC}"
+if [ -d "$BACKUP_DIR" ]; then
+    # Restore all files from backup directory
+    find "$BACKUP_DIR" -type f | while read -r backup_file; do
+        # Get relative path by removing backup directory prefix
+        relative_path="${backup_file#"$BACKUP_DIR/"}"
+        
+        # Skip if this is a directory backup
+        if [ -f "$backup_file" ]; then
+            # Create directory if it doesn't exist
+            mkdir -p "$(dirname "$relative_path")"
+            cp "$backup_file" "$relative_path"
+            echo "  ✅ Restored $relative_path"
+        fi
+    done
+    
+    # Also restore directories
+    find "$BACKUP_DIR" -type d -mindepth 1 | while read -r backup_dir; do
+        relative_path="${backup_dir#"$BACKUP_DIR/"}"
+        if [ -d "$backup_dir" ] && [ ! -d "$relative_path" ]; then
+            cp -r "$backup_dir" "$relative_path"
+            echo "  ✅ Restored directory $relative_path"
+        fi
+    done
+else
+    echo "  ⚠️  No backup directory found"
 fi
 
 # Fix hardcoded author information in setup.py
