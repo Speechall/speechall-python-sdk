@@ -40,4 +40,4 @@ jobs:
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
-        # skip_existing: true # To skip publishing if the version already exists
+        skip_existing: true # To skip publishing if the version already exists

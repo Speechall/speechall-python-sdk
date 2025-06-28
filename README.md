@@ -23,7 +23,7 @@ Python 3.7+
 If the python package is hosted on a repository, you can install directly using:
 
 ```sh
-pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
+pip install speechall
 ```
 (you may need to run `pip` with root permission: `sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git`)
 
@@ -56,10 +56,13 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 ```python
 
-import time
+import os
 import speechall
+from speechall.api.speech_to_text_api import SpeechToTextApi
+from speechall.models.transcription_model_identifier import TranscriptionModelIdentifier
+from speechall.models.transcript_language_code import TranscriptLanguageCode
+from speechall.models.transcript_output_format import TranscriptOutputFormat
 from speechall.rest import ApiException
-from pprint import pprint
 
 # Defining the host is optional and defaults to https://api.speechall.com/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -67,30 +70,39 @@ configuration = speechall.Configuration(
     host = "https://api.speechall.com/v1"
 )
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
 # Configure Bearer authorization (API Key): bearerAuth
 configuration = speechall.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
+    access_token = os.environ["SPEECHALL_API_KEY"]
 )
-
 
 # Enter a context with an instance of the API client
 with speechall.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = speechall.ReplacementRulesApi(api_client)
-    create_replacement_ruleset_request = {"name":"Acme Corp Corrections","rules":[{"kind":"exact","search":"speechal","replacement":"Speechall","caseSensitive":false},{"kind":"regex","pattern":"\\b(\\d{3})-(\\d{2})-(\\d{4})\\b","replacement":"[REDACTED SSN]","flags":["i"]}]} # CreateReplacementRulesetRequest | JSON object containing the name for the ruleset and an array of replacement rule objects.
-
+    api_instance = speechall.SpeechToTextApi(api_client)
+    
+    # Path to your audio file
+    audio_file_path = "path/to/your/audio/file.wav"
+    
     try:
-        # Create a reusable set of text replacement rules.
-        api_response = api_instance.create_replacement_ruleset(create_replacement_ruleset_request)
-        print("The response of ReplacementRulesApi->create_replacement_ruleset:\n")
-        pprint(api_response)
+        # Read the audio file
+        with open(audio_file_path, 'rb') as audio_file:
+            audio_data = audio_file.read()
+        
+        # Transcribe the audio file
+        result = api_instance.transcribe(
+            model=TranscriptionModelIdentifier("openai.whisper-1"),
+            body=audio_data,
+            language=TranscriptLanguageCode("en"),
+            output_format=TranscriptOutputFormat.JSON,
+            punctuation=True
+        )
+        
+        # Print the transcribed text
+        print("Transcription result:")
+        print(result.actual_instance.text)
+        
     except ApiException as e:
-        print("Exception when calling ReplacementRulesApi->create_replacement_ruleset: %s\n" % e)
+        print("Exception when calling SpeechToTextApi->transcribe: %s\n" % e)
 
 ```
 
@@ -141,10 +153,3 @@ Authentication schemes defined for the API:
 ### bearerAuth
 
 - **Type**: Bearer authentication (API Key)
-
-
-## Author
-
-
-
-
