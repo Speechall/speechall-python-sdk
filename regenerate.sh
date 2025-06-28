@@ -138,11 +138,6 @@ if command -v uv &> /dev/null; then
     uv sync
     echo -e "${GREEN}✅ Dependencies updated with uv${NC}"
 else
-    # requirements.txt was deleted, setup.py handles dependencies via pyproject.toml
-    # Forcing reinstall based on pyproject.toml if uv is present
-    uv pip install .
-    echo -e "${GREEN}✅ Dependencies updated with uv (from pyproject.toml)${NC}"
-else
     # pip install -r requirements.txt # requirements.txt is no longer used
     pip install . # Install from pyproject.toml / setup.py
     echo -e "${GREEN}✅ Dependencies updated with pip (from pyproject.toml)${NC}"
