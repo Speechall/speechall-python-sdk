@@ -41,6 +41,48 @@ class TranscriptionResponse(BaseModel):
         actual_instance: Any
     one_of_schemas: List[str] = Field(TRANSCRIPTIONRESPONSE_ONE_OF_SCHEMAS, const=True)
 
+    # Convenience properties for consistent UX across response formats
+    @property
+    def text(self) -> str:
+        """Get the transcribed text regardless of response format."""
+        if hasattr(self.actual_instance, 'text'):
+            return self.actual_instance.text
+        return str(self.actual_instance)
+    
+    @property
+    def is_detailed(self) -> bool:
+        """Check if this is a detailed response with structured data."""
+        from speechall.models.transcription_detailed import TranscriptionDetailed
+        return isinstance(self.actual_instance, TranscriptionDetailed)
+    
+    @property
+    def segments(self):
+        """Get segments if available (detailed responses only)."""
+        if self.is_detailed and hasattr(self.actual_instance, 'segments'):
+            return self.actual_instance.segments
+        return None
+    
+    @property
+    def words(self):
+        """Get words if available (detailed responses only)."""
+        if self.is_detailed and hasattr(self.actual_instance, 'words'):
+            return self.actual_instance.words
+        return None
+    
+    @property
+    def language(self):
+        """Get language if available (detailed responses only)."""
+        if self.is_detailed and hasattr(self.actual_instance, 'language'):
+            return self.actual_instance.language
+        return None
+    
+    @property
+    def duration(self):
+        """Get duration if available (detailed responses only)."""
+        if self.is_detailed and hasattr(self.actual_instance, 'duration'):
+            return self.actual_instance.duration
+        return None
+
     class Config:
         validate_assignment = True
 

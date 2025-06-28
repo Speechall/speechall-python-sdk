@@ -30,7 +30,7 @@ if os.path.exists(audio_file_path):
                 model=TranscriptionModelIdentifier.OPENAI_DOT_WHISPER_MINUS_1,
                 body=f.read()
             )
-        print(f"Transcription: {result}")
+        print(f"Transcription: {result.text}")
     except Exception as e:
         print(f"Error transcribing: {e}")
 else:

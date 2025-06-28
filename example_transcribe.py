@@ -98,7 +98,7 @@ def transcribe_local_file(api_instance, file_path, model_id="openai.whisper-1", 
         print("✅ Transcription completed!")
         
         # Access the text directly
-        transcribed_text = result.actual_instance.text
+        transcribed_text = result.text
         print(f"📝 Transcribed Text:\n{transcribed_text}")
         
         # Also show the full result structure

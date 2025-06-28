@@ -248,8 +248,8 @@ class ApiClient:
               # Check for dual-format responses (JSON or plain text)
               content_type = response_data.getheader('content-type')
               if content_type and 'text/plain' in content_type.lower():
-                  # For text/plain responses, return the raw string data
-                  return_data = response_data.data
+                  # For text/plain responses, create a consistent wrapper
+                  return_data = self._create_text_response_wrapper(response_data.data, response_type)
               else:
                   # For JSON responses, deserialize normally
                   return_data = self.deserialize(response_data, response_type)
@@ -309,6 +309,33 @@ class ApiClient:
 
         return {key: self.sanitize_for_serialization(val)
                 for key, val in obj_dict.items()}
+
+    def _create_text_response_wrapper(self, text_data, response_type):
+        """
+        Create a wrapper object for text responses that provides the same interface
+        as JSON responses for consistent UX.
+        
+        :param text_data: The plain text response data
+        :param response_type: The expected response type (e.g., "TranscriptionResponse")
+        :return: A wrapper object with consistent interface
+        """
+        # Import the response class dynamically
+        if response_type == "TranscriptionResponse":
+            from speechall.models.transcription_response import TranscriptionResponse
+            from speechall.models.transcription_only_text import TranscriptionOnlyText
+            
+            # Create a minimal TranscriptionOnlyText instance
+            text_instance = TranscriptionOnlyText(
+                id="text-response",
+                text=text_data
+            )
+            
+            # Wrap it in a TranscriptionResponse
+            wrapper = TranscriptionResponse(actual_instance=text_instance)
+            return wrapper
+        else:
+            # For other response types, return the text data as-is
+            return text_data
 
     def deserialize(self, response, response_type):
         """Deserializes response into an object.
