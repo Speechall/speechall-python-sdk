@@ -99,7 +99,7 @@ with speechall.ApiClient(configuration) as api_client:
         
         # Print the transcribed text
         print("Transcription result:")
-        print(result.actual_instance.text)
+        print(result.text)
         
     except ApiException as e:
         print("Exception when calling SpeechToTextApi->transcribe: %s\n" % e)

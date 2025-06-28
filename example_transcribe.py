@@ -98,8 +98,8 @@ def transcribe_local_file(api_instance, file_path, model_id="openai.whisper-1", 
         print("✅ Transcription completed!")
         
         # Access the text directly
-        transcribed_text = result.text
-        print(f"📝 Transcribed Text:\n{transcribed_text}")
+        transcribed_words = result.words
+        print(f"📝 Transcribed Text:\n{transcribed_words}")
         
         # Also show the full result structure
         # print(f"\n🔍 Full Result:\n{json.dumps(result.to_dict(), indent=2, default=str)}")
