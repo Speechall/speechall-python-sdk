@@ -1,0 +1,26 @@
+# Speechall Python SDK Configuration for openapi-python-client
+
+# Project and package naming
+project_name_override: "speechall-python-sdk"
+package_name_override: "speechall"
+package_version_override: "0.1.0"
+
+# Code generation options
+use_path_prefixes_for_title_model_names: false
+literal_enums: true
+docstrings_on_attributes: true
+
+# Field naming
+field_prefix: "field_"
+
+# Post-generation hooks - automatically format and lint code
+post_hooks:
+  - "ruff check . --fix"
+  - "ruff format ."
+
+# Class overrides (add custom mappings as needed)
+# Example:
+# class_overrides:
+#   OpenAI_CreateTranscriptionRequest:
+#     class_name: CreateTranscriptionRequest
+#     module_name: create_transcription_request
