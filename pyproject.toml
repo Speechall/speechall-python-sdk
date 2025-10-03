@@ -3,14 +3,14 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "speechall-python-sdk"
-version = "0.1.0"
-description = "Python SDK for the Speechall API - Speech-to-Text Service"
+name = "speechall"
+version = "0.2.0"
+description = "Python SDK for Speechall API - Speech-to-text transcription service"
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
 authors = [
-    { name = "Speechall", email = "support@speechall.com" }
+    { name = "Speechall" }
 ]
 keywords = ["speechall", "speech-to-text", "transcription", "api", "sdk"]
 classifiers = [
@@ -23,38 +23,37 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
 ]
-
 dependencies = [
-    "httpx>=0.20.0",
-    "attrs>=21.3.0",
-    "python-dateutil>=2.8.2",
+    "httpx>=0.27.0",
+    "pydantic>=2.0.0",
+    "typing-extensions>=4.0.0",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0.0",
-    "pytest-asyncio>=0.18.0",
-    "ruff>=0.1.0",
+    "pytest-asyncio>=0.21.0",
     "mypy>=1.0.0",
 ]
 
 [project.urls]
-Homepage = "https://speechall.com"
+Homepage = "https://github.com/speechall/speechall-python-sdk"
 Documentation = "https://docs.speechall.com"
 Repository = "https://github.com/speechall/speechall-python-sdk"
-"Bug Tracker" = "https://github.com/speechall/speechall-python-sdk/issues"
 
-[tool.ruff]
-line-length = 120
-target-version = "py38"
-
-[tool.ruff.lint]
-select = ["E", "F", "I", "N", "W"]
-ignore = []
+[tool.setuptools]
+packages = ["speechall"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = "test_*.py"
-python_functions = "test_*"
 asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.8"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
