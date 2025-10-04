@@ -11,7 +11,7 @@ Requirements:
 
 import os
 
-from speechall import Speechall, ReplacementRule, ExactRule
+from speechall import SpeechallApi, ReplacementRule, ExactRule
 
 
 def transcribe_remote_file():
@@ -25,7 +25,7 @@ def transcribe_remote_file():
             "Get your token from https://speechall.com"
         )
     
-    client = Speechall(token=api_token)
+    client = SpeechallApi(token=api_token)
     
     # URL to your audio file
     # The file must be publicly accessible
@@ -66,7 +66,7 @@ def transcribe_remote_with_replacement_rules():
     if not api_token:
         raise ValueError("SPEECHALL_API_TOKEN environment variable is required")
     
-    client = Speechall(token=api_token)
+    client = SpeechallApi(token=api_token)
     
     audio_url = "https://example.com/audio.mp3"
     
@@ -101,7 +101,7 @@ def transcribe_with_multiple_options():
     if not api_token:
         raise ValueError("SPEECHALL_API_TOKEN environment variable is required")
     
-    client = Speechall(token=api_token)
+    client = SpeechallApi(token=api_token)
     
     audio_url = "https://example.com/meeting.mp3"
     
@@ -137,7 +137,7 @@ def list_available_models():
     if not api_token:
         raise ValueError("SPEECHALL_API_TOKEN environment variable is required")
     
-    client = Speechall(token=api_token)
+    client = SpeechallApi(token=api_token)
     
     print("\n=== Available Speech-to-Text Models ===\n")
     
