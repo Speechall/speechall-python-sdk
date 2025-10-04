@@ -59,4 +59,4 @@ warn_unused_configs = true
 disallow_untyped_defs = true
 
 [tool.setuptools.package-dir]
-speechall = "."
+"" = "."

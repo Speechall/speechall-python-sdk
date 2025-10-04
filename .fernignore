@@ -1,0 +1,12 @@
+.git
+.gitignore
+fern/
+examples/
+pyproject.toml
+regenerate.sh
+REGENERATION_SETUP.md
+README.md
+LICENSE
+.vscode/
+.idea/
+*.md
