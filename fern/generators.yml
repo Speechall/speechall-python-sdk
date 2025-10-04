@@ -10,4 +10,4 @@ groups:
         version: 4.30.3
         output:
           location: local-file-system
-          path: ../speechall
+          path: ../src
