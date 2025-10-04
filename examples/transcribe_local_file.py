@@ -13,7 +13,7 @@ Requirements:
 import os
 from pathlib import Path
 
-from speechall import Speechall
+from speechall import SpeechallApi
 
 
 def transcribe_local_file():
@@ -28,7 +28,7 @@ def transcribe_local_file():
             "Get your token from https://speechall.com"
         )
     
-    client = Speechall(token=api_token)
+    client = SpeechallApi(token=api_token)
     
     # Path to your audio file
     audio_file_path = "audio.mp3"  # Replace with your audio file path
@@ -82,7 +82,7 @@ def transcribe_with_diarization():
     if not api_token:
         raise ValueError("SPEECHALL_API_TOKEN environment variable is required")
     
-    client = Speechall(token=api_token)
+    client = SpeechallApi(token=api_token)
     
     audio_file_path = "conversation.mp3"  # Audio with multiple speakers
     
@@ -119,7 +119,7 @@ def transcribe_with_custom_vocabulary():
     if not api_token:
         raise ValueError("SPEECHALL_API_TOKEN environment variable is required")
     
-    client = Speechall(token=api_token)
+    client = SpeechallApi(token=api_token)
     
     audio_file_path = "technical_talk.mp3"
     
