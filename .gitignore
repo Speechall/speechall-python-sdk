@@ -134,3 +134,5 @@ dmypy.json
 test-results/
 .claude-trace/
 uv.lock
+
+.claude/settings.local.json
