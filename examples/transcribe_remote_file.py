@@ -11,7 +11,7 @@ Requirements:
 
 import os
 
-from speechall import SpeechallApi, ReplacementRule, ExactRule
+from speechall import SpeechallApi, ReplacementRule_Exact
 REMOTE_AUDIO_URL="https://storage.googleapis.com/kagglesdsdata/datasets/829978/1417968/harvard.wav?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=databundle-worker-v2%40kaggle-161607.iam.gserviceaccount.com%2F20251127%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20251127T162539Z&X-Goog-Expires=345600&X-Goog-SignedHeaders=host&X-Goog-Signature=2413690e9eae7f5f19021283c74105971863b79f3147e1a2e268ba696d8ff93e227e9d30931b55a3f84564de6e0f8c870333b8e9021a7fa4689eb3dcb8b8fabe188f8cf57f56124809dd1a78190988800ee88135e06a879ca0a1afdb6e08000c2b0b4cb9f20fffe57e1820d5392f3613624a582124405101d89bb689ff714cebbdd6b6c4c671464d7422aa5c67059f64c2d7c556b4a5ac3a893d2f132e4e09d6d78bbb89815ef3c3acfa958eae709bc40d21b01960f057032de4e4a894353e26ec37788a2a7b71f6948c296dd0ad14dab84376ce92bc742e39a54a16f80c7f2fa3d45b91a4af201d07970b536bc19439fcc8f46f37d6dfa36eb28f7554c819c5"
 
 def transcribe_remote_file():
@@ -78,8 +78,9 @@ def transcribe_remote_with_replacement_rules():
 
     replacement_rules = [
         # Example: Replace "API" with "Application Programming Interface"
-        ReplacementRule(
-            rule=ExactRule(find="API", replace="Application Programming Interface")
+        ReplacementRule_Exact(
+            search="API",
+            replacement="Application Programming Interface"
         ),
     ]
 
