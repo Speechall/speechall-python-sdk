@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://schema.buildwithfern.dev/generators-yml.json
+api:
+  specs:
+    - openapi: ../../speechall-openapi/openapi.yaml
+default-group: local
+groups:
+  local:
+    generators:
+      - name: fernapi/fern-python-sdk
+        version: 4.30.3
+        output:
+          location: local-file-system
+          path: ../src
