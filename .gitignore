@@ -136,3 +136,14 @@ test-results/
 uv.lock
 
 .claude/settings.local.json
+
+# Beads issue tracker (local-only files)
+.beads/beads.db
+.beads/beads.db-*
+.beads/bd.sock
+.beads/bd.pipe
+.beads/.exclusive-lock
+.git/beads-worktrees/
+
+# AI planning documents (optional)
+history/
