@@ -3,8 +3,8 @@ set -e
 
 echo "🔍 Validating OpenAPI spec..."
 # Check if OpenAPI file exists
-if [ ! -f "../speechall-openapi/openapi.yaml" ]; then
-    echo "❌ Error: OpenAPI spec not found at ../speechall-openapi/openapi.yaml"
+if [ ! -f "../../Speechall-Repositories/speechall-openapi/openapi.yaml" ]; then
+    echo "❌ Error: OpenAPI spec not found at ../../Speechall-Repositories/speechall-openapi/openapi.yaml"
     exit 1
 fi
 
