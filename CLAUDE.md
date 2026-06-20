@@ -45,6 +45,3 @@ x-fern-ignore: true   # Excludes from SDK generation
 - ✅ To exclude endpoints from generation, use `x-fern-ignore: true` in the OpenAPI spec
 - ✅ After updating the OpenAPI spec, run `./regenerate.sh`
 - ✅ Manual code changes only in protected files (examples, docs, config)
-
-
-@AGENTS.md
