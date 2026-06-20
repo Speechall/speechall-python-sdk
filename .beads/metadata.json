@@ -1,7 +1,0 @@
-{
-  "database": "dolt",
-  "backend": "dolt",
-  "dolt_mode": "embedded",
-  "dolt_database": "speechall_python_sdk",
-  "project_id": "c364bbd0-810b-4e5b-9e73-a31e7ac1d645"
-}
