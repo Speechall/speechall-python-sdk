@@ -18,11 +18,11 @@ from ..errors.service_unavailable_error import ServiceUnavailableError
 from ..errors.too_many_requests_error import TooManyRequestsError
 from ..errors.unauthorized_error import UnauthorizedError
 from ..types.error_response import ErrorResponse
+from ..types.open_transcription_model_identifier import OpenTranscriptionModelIdentifier
 from ..types.replacement_rule import ReplacementRule
 from ..types.speech_to_text_model import SpeechToTextModel
 from ..types.transcript_language_code import TranscriptLanguageCode
 from ..types.transcript_output_format import TranscriptOutputFormat
-from ..types.transcription_model_identifier import TranscriptionModelIdentifier
 from ..types.transcription_response import TranscriptionResponse
 
 # this is used as the default value for optional parameters
@@ -36,7 +36,7 @@ class RawSpeechToTextClient:
     def transcribe(
         self,
         *,
-        model: TranscriptionModelIdentifier,
+        model: OpenTranscriptionModelIdentifier,
         request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
         language: typing.Optional[TranscriptLanguageCode] = None,
         output_format: typing.Optional[TranscriptOutputFormat] = None,
@@ -56,7 +56,7 @@ class RawSpeechToTextClient:
 
         Parameters
         ----------
-        model : TranscriptionModelIdentifier
+        model : OpenTranscriptionModelIdentifier
             The identifier of the speech-to-text model to use for the transcription, in the format `provider.model`. See the `/speech-to-text-models` endpoint for available models.
 
         request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
@@ -227,7 +227,7 @@ class RawSpeechToTextClient:
         self,
         *,
         file_url: str,
-        model: TranscriptionModelIdentifier,
+        model: OpenTranscriptionModelIdentifier,
         replacement_ruleset: typing.Optional[typing.Sequence[ReplacementRule]] = OMIT,
         language: typing.Optional[TranscriptLanguageCode] = OMIT,
         output_format: typing.Optional[TranscriptOutputFormat] = OMIT,
@@ -250,7 +250,7 @@ class RawSpeechToTextClient:
         file_url : str
             The publicly accessible URL of the audio file to transcribe. The API server must be able to fetch the audio from this URL.
 
-        model : TranscriptionModelIdentifier
+        model : OpenTranscriptionModelIdentifier
             The identifier of the speech-to-text model to use.
 
         replacement_ruleset : typing.Optional[typing.Sequence[ReplacementRule]]
@@ -556,7 +556,7 @@ class AsyncRawSpeechToTextClient:
     async def transcribe(
         self,
         *,
-        model: TranscriptionModelIdentifier,
+        model: OpenTranscriptionModelIdentifier,
         request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
         language: typing.Optional[TranscriptLanguageCode] = None,
         output_format: typing.Optional[TranscriptOutputFormat] = None,
@@ -576,7 +576,7 @@ class AsyncRawSpeechToTextClient:
 
         Parameters
         ----------
-        model : TranscriptionModelIdentifier
+        model : OpenTranscriptionModelIdentifier
             The identifier of the speech-to-text model to use for the transcription, in the format `provider.model`. See the `/speech-to-text-models` endpoint for available models.
 
         request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
@@ -747,7 +747,7 @@ class AsyncRawSpeechToTextClient:
         self,
         *,
         file_url: str,
-        model: TranscriptionModelIdentifier,
+        model: OpenTranscriptionModelIdentifier,
         replacement_ruleset: typing.Optional[typing.Sequence[ReplacementRule]] = OMIT,
         language: typing.Optional[TranscriptLanguageCode] = OMIT,
         output_format: typing.Optional[TranscriptOutputFormat] = OMIT,
@@ -770,7 +770,7 @@ class AsyncRawSpeechToTextClient:
         file_url : str
             The publicly accessible URL of the audio file to transcribe. The API server must be able to fetch the audio from this URL.
 
-        model : TranscriptionModelIdentifier
+        model : OpenTranscriptionModelIdentifier
             The identifier of the speech-to-text model to use.
 
         replacement_ruleset : typing.Optional[typing.Sequence[ReplacementRule]]

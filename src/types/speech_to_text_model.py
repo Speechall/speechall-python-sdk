@@ -4,9 +4,9 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .open_transcription_model_identifier import OpenTranscriptionModelIdentifier
 from .speech_to_text_model_accuracy_tier import SpeechToTextModelAccuracyTier
 from .speech_to_text_model_model_type import SpeechToTextModelModelType
-from .transcription_model_identifier import TranscriptionModelIdentifier
 from .transcription_provider import TranscriptionProvider
 
 
@@ -15,7 +15,7 @@ class SpeechToTextModel(UniversalBaseModel):
     Describes an available speech-to-text model, its provider, capabilities, and characteristics.
     """
 
-    id: TranscriptionModelIdentifier = pydantic.Field()
+    id: OpenTranscriptionModelIdentifier = pydantic.Field()
     """
     The unique identifier for this model (`provider.model_name`).
     """

@@ -9,6 +9,7 @@ if typing.TYPE_CHECKING:
     from .base_transcription_configuration import BaseTranscriptionConfiguration
     from .error_response import ErrorResponse
     from .exact_rule import ExactRule
+    from .open_transcription_model_identifier import OpenTranscriptionModelIdentifier
     from .regex_group_rule import RegexGroupRule
     from .regex_group_rule_flags_item import RegexGroupRuleFlagsItem
     from .regex_rule import RegexRule
@@ -35,6 +36,7 @@ _dynamic_imports: typing.Dict[str, str] = {
     "BaseTranscriptionConfiguration": ".base_transcription_configuration",
     "ErrorResponse": ".error_response",
     "ExactRule": ".exact_rule",
+    "OpenTranscriptionModelIdentifier": ".open_transcription_model_identifier",
     "RegexGroupRule": ".regex_group_rule",
     "RegexGroupRuleFlagsItem": ".regex_group_rule_flags_item",
     "RegexRule": ".regex_rule",
@@ -83,6 +85,7 @@ __all__ = [
     "BaseTranscriptionConfiguration",
     "ErrorResponse",
     "ExactRule",
+    "OpenTranscriptionModelIdentifier",
     "RegexGroupRule",
     "RegexGroupRuleFlagsItem",
     "RegexRule",

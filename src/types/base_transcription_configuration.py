@@ -4,9 +4,9 @@ import typing
 
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
+from .open_transcription_model_identifier import OpenTranscriptionModelIdentifier
 from .transcript_language_code import TranscriptLanguageCode
 from .transcript_output_format import TranscriptOutputFormat
-from .transcription_model_identifier import TranscriptionModelIdentifier
 
 
 class BaseTranscriptionConfiguration(UniversalBaseModel):
@@ -14,7 +14,7 @@ class BaseTranscriptionConfiguration(UniversalBaseModel):
     Common configuration options for transcription, applicable to both direct uploads and remote URLs.
     """
 
-    model: TranscriptionModelIdentifier = pydantic.Field()
+    model: OpenTranscriptionModelIdentifier = pydantic.Field()
     """
     The identifier of the speech-to-text model to use.
     """
