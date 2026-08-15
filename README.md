@@ -226,8 +226,8 @@ mypy .
 ## Support
 
 - Documentation: [docs.speechall.com](https://docs.speechall.com)
-- GitHub: [github.com/speechall/speechall-python-sdk](https://github.com/speechall/speechall-python-sdk)
-- Issues: [github.com/speechall/speechall-python-sdk/issues](https://github.com/speechall/speechall-python-sdk/issues)
+- GitHub: [github.com/Speechall/speechall-python-sdk](https://github.com/Speechall/speechall-python-sdk)
+- Issues: [github.com/Speechall/speechall-python-sdk/issues](https://github.com/Speechall/speechall-python-sdk/issues)
 
 ## License
 

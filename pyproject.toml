@@ -39,9 +39,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/speechall/speechall-python-sdk"
+Homepage = "https://github.com/Speechall/speechall-python-sdk"
 Documentation = "https://docs.speechall.com"
-Repository = "https://github.com/speechall/speechall-python-sdk"
+Repository = "https://github.com/Speechall/speechall-python-sdk"
 
 [tool.setuptools]
 package-dir = {"speechall" = "src"}
