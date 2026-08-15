@@ -4,11 +4,11 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.open_transcription_model_identifier import OpenTranscriptionModelIdentifier
 from ..types.replacement_rule import ReplacementRule
 from ..types.speech_to_text_model import SpeechToTextModel
 from ..types.transcript_language_code import TranscriptLanguageCode
 from ..types.transcript_output_format import TranscriptOutputFormat
-from ..types.transcription_model_identifier import TranscriptionModelIdentifier
 from ..types.transcription_response import TranscriptionResponse
 from .raw_client import AsyncRawSpeechToTextClient, RawSpeechToTextClient
 
@@ -34,7 +34,7 @@ class SpeechToTextClient:
     def transcribe(
         self,
         *,
-        model: TranscriptionModelIdentifier,
+        model: OpenTranscriptionModelIdentifier,
         request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
         language: typing.Optional[TranscriptLanguageCode] = None,
         output_format: typing.Optional[TranscriptOutputFormat] = None,
@@ -54,7 +54,7 @@ class SpeechToTextClient:
 
         Parameters
         ----------
-        model : TranscriptionModelIdentifier
+        model : OpenTranscriptionModelIdentifier
             The identifier of the speech-to-text model to use for the transcription, in the format `provider.model`. See the `/speech-to-text-models` endpoint for available models.
 
         request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
@@ -116,7 +116,7 @@ class SpeechToTextClient:
         self,
         *,
         file_url: str,
-        model: TranscriptionModelIdentifier,
+        model: OpenTranscriptionModelIdentifier,
         replacement_ruleset: typing.Optional[typing.Sequence[ReplacementRule]] = OMIT,
         language: typing.Optional[TranscriptLanguageCode] = OMIT,
         output_format: typing.Optional[TranscriptOutputFormat] = OMIT,
@@ -139,7 +139,7 @@ class SpeechToTextClient:
         file_url : str
             The publicly accessible URL of the audio file to transcribe. The API server must be able to fetch the audio from this URL.
 
-        model : TranscriptionModelIdentifier
+        model : OpenTranscriptionModelIdentifier
             The identifier of the speech-to-text model to use.
 
         replacement_ruleset : typing.Optional[typing.Sequence[ReplacementRule]]
@@ -264,7 +264,7 @@ class AsyncSpeechToTextClient:
     async def transcribe(
         self,
         *,
-        model: TranscriptionModelIdentifier,
+        model: OpenTranscriptionModelIdentifier,
         request: typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]],
         language: typing.Optional[TranscriptLanguageCode] = None,
         output_format: typing.Optional[TranscriptOutputFormat] = None,
@@ -284,7 +284,7 @@ class AsyncSpeechToTextClient:
 
         Parameters
         ----------
-        model : TranscriptionModelIdentifier
+        model : OpenTranscriptionModelIdentifier
             The identifier of the speech-to-text model to use for the transcription, in the format `provider.model`. See the `/speech-to-text-models` endpoint for available models.
 
         request : typing.Union[bytes, typing.Iterator[bytes], typing.AsyncIterator[bytes]]
@@ -346,7 +346,7 @@ class AsyncSpeechToTextClient:
         self,
         *,
         file_url: str,
-        model: TranscriptionModelIdentifier,
+        model: OpenTranscriptionModelIdentifier,
         replacement_ruleset: typing.Optional[typing.Sequence[ReplacementRule]] = OMIT,
         language: typing.Optional[TranscriptLanguageCode] = OMIT,
         output_format: typing.Optional[TranscriptOutputFormat] = OMIT,
@@ -369,7 +369,7 @@ class AsyncSpeechToTextClient:
         file_url : str
             The publicly accessible URL of the audio file to transcribe. The API server must be able to fetch the audio from this URL.
 
-        model : TranscriptionModelIdentifier
+        model : OpenTranscriptionModelIdentifier
             The identifier of the speech-to-text model to use.
 
         replacement_ruleset : typing.Optional[typing.Sequence[ReplacementRule]]

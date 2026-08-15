@@ -10,8 +10,6 @@ TranscriptionProvider = typing.Union[
         "cloudflare",
         "deepgram",
         "elevenlabs",
-        "falai",
-        "fireworksai",
         "gemini",
         "gladia",
         "google",
