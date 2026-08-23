@@ -19,6 +19,8 @@ TranscriptionProvider = typing.Union[
         "openai",
         "revai",
         "speechmatics",
+        "togetherai",
+        "xai",
     ],
     typing.Any,
 ]

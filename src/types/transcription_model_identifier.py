@@ -61,6 +61,8 @@ TranscriptionModelIdentifier = typing.Union[
         "revai.machine",
         "speechmatics.enhanced",
         "speechmatics.standard",
+        "togetherai.nvidia-parakeet-tdt-0.6b-v3",
+        "xai.grok-stt",
     ],
     typing.Any,
 ]
