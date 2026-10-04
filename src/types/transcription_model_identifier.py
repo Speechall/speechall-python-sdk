@@ -63,7 +63,6 @@ TranscriptionModelIdentifier = typing.Union[
         "speechmatics.standard",
         "togetherai.nvidia-parakeet-tdt-0.6b-v3",
         "togetherai.thinkingmachines-inkling",
-        "togetherai.thinkingmachines-inkling-small",
         "xai.grok-stt",
     ],
     typing.Any,
