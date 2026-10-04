@@ -4,7 +4,6 @@ import typing
 
 TranscriptionModelIdentifier = typing.Union[
     typing.Literal[
-        "amazon.transcribe",
         "assemblyai.universal-2",
         "assemblyai.universal-3-5-pro",
         "azure.standard",
@@ -46,8 +45,6 @@ TranscriptionModelIdentifier = typing.Union[
         "gemini.gemini-2.5-flash-lite",
         "gemini.gemini-2.5-pro",
         "gladia.standard",
-        "google.enhanced",
-        "google.standard",
         "groq.whisper-large-v3",
         "groq.whisper-large-v3-turbo",
         "ibm.standard",
@@ -59,9 +56,14 @@ TranscriptionModelIdentifier = typing.Union[
         "openai.whisper-1",
         "revai.fusion",
         "revai.machine",
+        "smallestai.pulse-pro",
+        "smallestai.pulse",
+        "soniox.stt-async-v5",
         "speechmatics.enhanced",
         "speechmatics.standard",
         "togetherai.nvidia-parakeet-tdt-0.6b-v3",
+        "togetherai.thinkingmachines-inkling",
+        "togetherai.thinkingmachines-inkling-small",
         "xai.grok-stt",
     ],
     typing.Any,

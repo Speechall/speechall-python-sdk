@@ -4,7 +4,6 @@ import typing
 
 TranscriptionProvider = typing.Union[
     typing.Literal[
-        "amazon",
         "assemblyai",
         "azure",
         "cloudflare",
@@ -12,12 +11,13 @@ TranscriptionProvider = typing.Union[
         "elevenlabs",
         "gemini",
         "gladia",
-        "google",
         "groq",
         "ibm",
         "mistral",
         "openai",
         "revai",
+        "smallestai",
+        "soniox",
         "speechmatics",
         "togetherai",
         "xai",
