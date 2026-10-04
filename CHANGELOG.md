@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.0] - 2026-10-04
+
+### Removed
+
+- Removed the `togetherai.thinkingmachines-inkling-small` transcription model identifier. Applications using this model must select a supported model before upgrading. `togetherai.thinkingmachines-inkling` remains supported.
+
+This major release reflects removal of a supported model identifier.
+
 ## [1.0.0] - 2026-10-04
 
 ### Added
