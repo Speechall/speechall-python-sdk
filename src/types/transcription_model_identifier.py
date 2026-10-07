@@ -53,6 +53,7 @@ TranscriptionModelIdentifier = typing.Union[
         "openai.gpt-4o-mini-transcribe",
         "openai.gpt-4o-transcribe",
         "openai.gpt-4o-transcribe-diarize",
+        "openai.gpt-transcribe",
         "openai.whisper-1",
         "revai.fusion",
         "revai.machine",
