@@ -7,6 +7,7 @@ TranscriptionModelIdentifier = typing.Union[
         "assemblyai.universal-2",
         "assemblyai.universal-3-5-pro",
         "azure.standard",
+        "microsoft.mai-transcribe-2",
         "cloudflare.whisper",
         "cloudflare.whisper-large-v3-turbo",
         "cloudflare.whisper-tiny-en",
