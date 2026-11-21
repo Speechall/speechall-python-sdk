@@ -28,4 +28,4 @@ jobs:
           pip install -e ".[dev]"
 
       - name: Run tests
-        run: pytest tests/ -v || echo "No tests found"
+        run: pytest tests/ -v

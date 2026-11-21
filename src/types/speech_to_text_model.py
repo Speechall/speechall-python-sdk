@@ -5,9 +5,7 @@ import typing
 import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 from .open_transcription_model_identifier import OpenTranscriptionModelIdentifier
-from .speech_to_text_model_accuracy_tier import SpeechToTextModelAccuracyTier
-from .speech_to_text_model_model_type import SpeechToTextModelModelType
-from .transcription_provider import TranscriptionProvider
+from .open_transcription_provider import OpenTranscriptionProvider
 
 
 class SpeechToTextModel(UniversalBaseModel):
@@ -25,7 +23,7 @@ class SpeechToTextModel(UniversalBaseModel):
     A user-friendly name for the model.
     """
 
-    provider: TranscriptionProvider = pydantic.Field()
+    provider: OpenTranscriptionProvider = pydantic.Field()
     """
     The provider of this model.
     """
@@ -90,14 +88,14 @@ class SpeechToTextModel(UniversalBaseModel):
     The date when this specific version of the model was released or last updated.
     """
 
-    model_type: typing.Optional[SpeechToTextModelModelType] = pydantic.Field(default=None)
+    model_type: typing.Optional[str] = pydantic.Field(default=None)
     """
-    The primary type or training domain of the model. Helps identify suitability for different audio types.
+    The primary type or training domain of the model. Helps identify suitability for different audio types. Known values are listed in `SpeechToTextModelModelType`.
     """
 
-    accuracy_tier: typing.Optional[SpeechToTextModelAccuracyTier] = pydantic.Field(default=None)
+    accuracy_tier: typing.Optional[str] = pydantic.Field(default=None)
     """
-    A general indication of the model's expected accuracy level relative to other models. Not a guaranteed metric.
+    A general indication of the model's expected accuracy level relative to other models. Not a guaranteed metric. Known values are listed in `SpeechToTextModelAccuracyTier`.
     """
 
     supported_audio_encodings: typing.Optional[typing.List[str]] = pydantic.Field(default=None)
