@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.4.0] - 2026-11-21
+
+### Changed
+
+- Catalog entries expose providers, model types, and accuracy tiers as open strings, so new values are available without updating the SDK. The known-value type aliases remain available.
+
 ## [2.0.0] - 2026-10-04
 
 ### Removed
